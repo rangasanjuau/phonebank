@@ -1,6 +1,7 @@
 package com.belong.phonebank.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class Customer implements Serializable {
     private String firstName;
     private String lastName;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL )
+    @JsonManagedReference
     private List<PhoneNumber> phoneNumbers;
 
 

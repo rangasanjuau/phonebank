@@ -1,11 +1,10 @@
 package com.belong.phonebank.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -23,6 +22,7 @@ public class PhoneNumber implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "customerId")
+    @JsonBackReference
     private Customer customer;
 
 }
