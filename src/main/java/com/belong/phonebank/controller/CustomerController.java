@@ -1,6 +1,8 @@
 package com.belong.phonebank.controller;
 
 
+import com.belong.phonebank.dto.CustomerResponse;
+import com.belong.phonebank.dto.CustomerResponseDto;
 import com.belong.phonebank.model.Customer;
 import com.belong.phonebank.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ public class CustomerController {
     public CustomerService service;
 
     @GetMapping(value = "/{id}")
-    public Customer getPhoneNumbersById(@PathVariable Long id) {
-        return service.getCustomer(id).get();
+    public CustomerResponseDto getPhoneNumbersById(@PathVariable Long id) {
+        return new CustomerResponseDto(new CustomerResponse(service.getCustomer(id).get()));
     }
 }

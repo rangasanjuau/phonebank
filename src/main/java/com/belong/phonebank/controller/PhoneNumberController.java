@@ -1,6 +1,8 @@
 package com.belong.phonebank.controller;
 
 
+import com.belong.phonebank.dto.PhoneNumberResponse;
+import com.belong.phonebank.dto.PhoneNumberResponseDto;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.service.PhoneNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,9 @@ public class PhoneNumberController {
     public PhoneNumberService service;
 
     @GetMapping("/all")
-    public List<PhoneNumber> getPhoneNumbers() {
+    public PhoneNumberResponseDto getPhoneNumbers() {
         List<PhoneNumber> phoneNumbers = service.getAllPhoneNumbers();
-        return phoneNumbers;
+        return new PhoneNumberResponseDto(new PhoneNumberResponse(phoneNumbers));
     }
 
     @PutMapping("/activate/{id}")
