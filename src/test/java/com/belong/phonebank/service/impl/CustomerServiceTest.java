@@ -1,6 +1,8 @@
 package com.belong.phonebank.service.impl;
 
+import com.belong.phonebank.model.Customer;
 import com.belong.phonebank.model.PhoneNumber;
+import com.belong.phonebank.repository.CustomerRepository;
 import com.belong.phonebank.repository.PhoneNumberRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,14 +21,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class PhoneNumberServiceTest {
-
+public class CustomerServiceTest {
     private static final int listSize = 10;
-
     @InjectMocks
-    PhoneNumberServiceImpl phoneNumberService;
+    CustomerServiceImpl customerService;
     @Mock
-    PhoneNumberRepository repository;
+    CustomerRepository repository;
 
     @BeforeEach
     public void setup() {
@@ -35,32 +35,19 @@ public class PhoneNumberServiceTest {
 
 
     @Test
-    public void getAllPhoneNumbers_ShouldReturnPhoneNumber() {
-        List<PhoneNumber> list = getPhoneNumberList(listSize);
+    public void getCustomer_ShouldReturnCustomer() {
 
-        when(repository.findAll()).thenReturn(list);
+        Customer customer = new Customer();
+        customer.setCustomerId(1L);
+        customer.setPhoneNumbers(getPhoneNumberList(listSize));
 
-        List<PhoneNumber> phoneNumbers = phoneNumberService.getAllPhoneNumbers();
 
-        assertEquals(listSize, phoneNumbers.size());
+        when(repository.findById(any())).thenReturn(Optional.of(customer));
+
+        Optional<Customer> customer1 = customerService.getCustomer(1L);
+
+        assertEquals(listSize, customer1.get().getPhoneNumbers().size());
     }
-
-    @Test
-    public void updateActivation_ShouldUpdatePhoneNumberAndReturnIt() {
-        long id = 1L;
-        boolean active = false;
-        PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.setPhoneNumberId(id);
-        phoneNumber.setActive(!active);
-        when(repository.findById(id)).thenReturn(Optional.of(phoneNumber));
-        when(repository.save(any(PhoneNumber.class))).thenReturn(phoneNumber);
-
-        PhoneNumber updatedPhoneNumber = phoneNumberService.updateActivation(id, active);
-
-        assertEquals(id, updatedPhoneNumber.getPhoneNumberId());
-        assertEquals(active, updatedPhoneNumber.isActive());
-    }
-
 
     public List<PhoneNumber> getPhoneNumberList(int listSize) {
         List<PhoneNumber> list = new ArrayList<>();
@@ -72,4 +59,5 @@ public class PhoneNumberServiceTest {
         }
         return list;
     }
+
 }
