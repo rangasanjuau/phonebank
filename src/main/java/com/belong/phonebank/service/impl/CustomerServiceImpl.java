@@ -1,5 +1,6 @@
 package com.belong.phonebank.service.impl;
 
+import com.belong.phonebank.Exception.ResourceNotFoundException;
 import com.belong.phonebank.model.Customer;
 import com.belong.phonebank.repository.CustomerRepository;
 import com.belong.phonebank.service.CustomerService;
@@ -14,9 +15,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository repository;
     @Override
-    public Optional<Customer> getCustomer(Long id) {
+    public Optional<Customer> getCustomer(Long id) throws ResourceNotFoundException {
         Optional<Customer> customer =  repository.findById(id);
-        return customer;
+
+        if(!customer.isPresent())
+            throw  new ResourceNotFoundException("Customer id# " + id + " Not Found " );
+        else
+            return customer;
+
+
     }
 
 }

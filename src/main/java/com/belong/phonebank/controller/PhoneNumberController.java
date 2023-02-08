@@ -1,6 +1,7 @@
 package com.belong.phonebank.controller;
 
 
+import com.belong.phonebank.Exception.ResourceNotFoundException;
 import com.belong.phonebank.dto.PhoneNumberResponse;
 import com.belong.phonebank.dto.PhoneNumberResponseDto;
 import com.belong.phonebank.model.PhoneNumber;
@@ -23,7 +24,7 @@ public class PhoneNumberController {
     }
 
     @PutMapping("/activate/{id}")
-    public PhoneNumber activateNumber(@PathVariable Long id) {
+    public PhoneNumber activateNumber(@PathVariable Long id) throws ResourceNotFoundException {
         return service.updateActivation(id, true);
     }
 

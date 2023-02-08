@@ -1,5 +1,6 @@
 package com.belong.phonebank.service.impl;
 
+import com.belong.phonebank.Exception.ResourceNotFoundException;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.repository.PhoneNumberRepository;
 import org.junit.Test;
@@ -46,7 +47,7 @@ public class PhoneNumberServiceTest {
     }
 
     @Test
-    public void updateActivation_ShouldUpdatePhoneNumberAndReturnIt() {
+    public void updateActivation_ShouldUpdatePhoneNumberAndReturnIt() throws ResourceNotFoundException {
         long id = 1L;
         boolean active = false;
         PhoneNumber phoneNumber = new PhoneNumber();

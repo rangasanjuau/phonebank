@@ -1,5 +1,6 @@
 package com.belong.phonebank.service.impl;
 
+import com.belong.phonebank.Exception.ResourceNotFoundException;
 import com.belong.phonebank.model.Customer;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.repository.CustomerRepository;
@@ -35,7 +36,7 @@ public class CustomerServiceTest {
 
 
     @Test
-    public void getCustomer_ShouldReturnCustomer() {
+    public void getCustomer_ShouldReturnCustomer() throws ResourceNotFoundException {
 
         Customer customer = new Customer();
         customer.setCustomerId(1L);

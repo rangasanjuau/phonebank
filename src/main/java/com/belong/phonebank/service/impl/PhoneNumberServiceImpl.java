@@ -1,5 +1,6 @@
 package com.belong.phonebank.service.impl;
 
+import com.belong.phonebank.Exception.ResourceNotFoundException;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.repository.PhoneNumberRepository;
 import com.belong.phonebank.service.PhoneNumberService;
@@ -21,9 +22,13 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     }
 
     @Override
-    public PhoneNumber updateActivation(Long id, boolean active) {
+    public PhoneNumber updateActivation(Long id, boolean active) throws ResourceNotFoundException {
 
         Optional<PhoneNumber> phoneNumber = repository.findById(id);
+
+        if(!phoneNumber.isPresent())
+            throw  new ResourceNotFoundException("Phone number with id  " + id + " Not Found ");
+
         PhoneNumber updatedPhoneNumber = phoneNumber.get();
         updatedPhoneNumber.setActive(active);
         return repository.save(updatedPhoneNumber);
