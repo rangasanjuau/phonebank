@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PhoneNumberResponseDto {
-    private PhoneNumberResponse data;
-    private Meta meta;
+public class Meta {
+    private long totalRecords;
+    private long totalPages;
 }

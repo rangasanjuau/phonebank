@@ -1,6 +1,9 @@
 package com.belong.phonebank.service.impl;
 
 import com.belong.phonebank.Exception.ResourceNotFoundException;
+import com.belong.phonebank.dto.Meta;
+import com.belong.phonebank.dto.PhoneNumberResponse;
+import com.belong.phonebank.dto.PhoneNumberResponseDto;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.repository.PhoneNumberRepository;
 import org.junit.Test;
@@ -9,6 +12,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
@@ -37,13 +44,22 @@ public class PhoneNumberServiceTest {
 
     @Test
     public void getAllPhoneNumbers_ShouldReturnPhoneNumber() {
-        List<PhoneNumber> list = getPhoneNumberList(listSize);
+        int pageNo = 0;
+        int pageSize = 5;
+        Page<PhoneNumber> pageResult = getPhoneNumberDto(listSize);
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        when(repository.findAll(paging)).thenReturn(pageResult);
 
-        when(repository.findAll()).thenReturn(list);
+        Page<PhoneNumber> pagedResult = repository.findAll(paging);
 
-        List<PhoneNumber> phoneNumbers = phoneNumberService.getAllPhoneNumbers();
+        PhoneNumberResponseDto responseDto = phoneNumberService.getAllPhoneNumbers(pageNo, pageSize);
+        PhoneNumberResponse response = responseDto.getData();
+        Meta meta = responseDto.getMeta();
 
-        assertEquals(listSize, phoneNumbers.size());
+        assertEquals(listSize, response.getPhoneNumbers().size());
+        assertEquals(listSize, meta.getTotalRecords());
+        assertEquals(2, meta.getTotalPages());
+
     }
 
     @Test
@@ -63,14 +79,18 @@ public class PhoneNumberServiceTest {
     }
 
 
-    public List<PhoneNumber> getPhoneNumberList(int listSize) {
-        List<PhoneNumber> list = new ArrayList<>();
+    public Page<PhoneNumber> getPhoneNumberDto(int listSize) {
+        List<PhoneNumber> phoneNumbers = new ArrayList<>();
         for (int i = 0; i < listSize; i++) {
             PhoneNumber phoneNumber = new PhoneNumber();
             phoneNumber.setPhoneNumberId(i);
             phoneNumber.setActive(false);
-            list.add(phoneNumber);
+            phoneNumbers.add(phoneNumber);
         }
-        return list;
+
+        Pageable paging = PageRequest.of(0, 5);
+        Page<PhoneNumber> pagedResult = new PageImpl<>(phoneNumbers, paging, phoneNumbers.size());
+
+        return pagedResult;
     }
 }

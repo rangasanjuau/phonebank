@@ -18,12 +18,11 @@ public class CustomerServiceImpl implements CustomerService {
     public Optional<Customer> getCustomer(Long id) throws ResourceNotFoundException {
         Optional<Customer> customer =  repository.findById(id);
 
+        // Check if customer is present
         if(!customer.isPresent())
             throw  new ResourceNotFoundException("Customer id# " + id + " Not Found " );
         else
             return customer;
-
-
     }
 
 }
