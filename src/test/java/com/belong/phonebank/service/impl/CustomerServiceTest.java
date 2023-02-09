@@ -1,9 +1,10 @@
 package com.belong.phonebank.service.impl;
 
+import com.belong.phonebank.dto.PhoneNumberResponse;
+import com.belong.phonebank.exception.ResourceNotFoundException;
 import com.belong.phonebank.model.Customer;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.repository.CustomerRepository;
-import com.belong.phonebank.repository.PhoneNumberRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -35,25 +36,43 @@ public class CustomerServiceTest {
 
 
     @Test
-    public void getCustomer_ShouldReturnCustomer() {
+    public void getCustomer_ShouldReturnCustomer() throws ResourceNotFoundException {
 
         Customer customer = new Customer();
-        customer.setCustomerId(1L);
+        customer.setId(1L);
         customer.setPhoneNumbers(getPhoneNumberList(listSize));
 
 
         when(repository.findById(any())).thenReturn(Optional.of(customer));
 
-        Optional<Customer> customer1 = customerService.getCustomer(1L);
+        Customer customer1 = customerService.getCustomer(1L);
 
-        assertEquals(listSize, customer1.get().getPhoneNumbers().size());
+        assertEquals(listSize, customer1.getPhoneNumbers().size());
     }
+
+
+    @Test
+    public void getCustomerPhonNumbers_ShouldReturnPhoneNumberResponse() throws ResourceNotFoundException {
+
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setPhoneNumbers(getPhoneNumberList(listSize));
+
+
+        when(repository.findById(any())).thenReturn(Optional.of(customer));
+
+        PhoneNumberResponse phoneNumberResponse = customerService.getCustomerPhonNumbers(1L);
+
+        assertEquals(listSize, phoneNumberResponse.getPhoneNumbers().size());
+    }
+
+
 
     public List<PhoneNumber> getPhoneNumberList(int listSize) {
         List<PhoneNumber> list = new ArrayList<>();
         for (int i = 0; i < listSize; i++) {
             PhoneNumber phoneNumber = new PhoneNumber();
-            phoneNumber.setPhoneNumberId(i);
+            phoneNumber.setId(i);
             phoneNumber.setActive(false);
             list.add(phoneNumber);
         }

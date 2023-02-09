@@ -1,10 +1,10 @@
 package com.belong.phonebank.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -15,8 +15,8 @@ import java.io.Serializable;
 public class PhoneNumber implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long phoneNumberId;
-    private String phoneNumber;
+    private long id;
+    private String number;
     private String type;
     private boolean isActive;
 
