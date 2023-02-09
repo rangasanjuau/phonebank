@@ -16,7 +16,7 @@ import java.util.List;
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long customerId;
+    private long id;
     private String firstName;
     private String lastName;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
