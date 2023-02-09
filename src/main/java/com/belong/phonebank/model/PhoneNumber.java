@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class PhoneNumber implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long phoneNumberId;
+    private long id;
     private String number;
     private String type;
     private boolean isActive;
