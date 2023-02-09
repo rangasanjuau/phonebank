@@ -41,6 +41,16 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     }
 
     @Override
+    public PhoneNumber getPhoneNumberById(Long id) throws ResourceNotFoundException {
+
+        Optional<PhoneNumber> phoneNumber = repository.findById(id);
+        if (!phoneNumber.isPresent())
+            throw new ResourceNotFoundException("Phone number with id  " + id + " Not Found ");
+
+        return phoneNumber.get();
+    }
+
+    @Override
     public PhoneNumber updateActivation(Long id, boolean active) throws ResourceNotFoundException {
 
         Optional<PhoneNumber> phoneNumber = repository.findById(id);
