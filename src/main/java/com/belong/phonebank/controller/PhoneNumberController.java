@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/phone-bank/phone-numbers")
 @Validated
+@CrossOrigin(origins = "https://editor.swagger.io")
 public class PhoneNumberController {
     @Autowired
     public PhoneNumberService service;

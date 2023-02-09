@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/phone-bank/customer")
 @Validated
+@CrossOrigin(origins = "https://editor.swagger.io")
 public class CustomerController {
 
     @Autowired
