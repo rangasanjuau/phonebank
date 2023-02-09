@@ -44,9 +44,9 @@ public class CustomerServiceTest {
 
         when(repository.findById(any())).thenReturn(Optional.of(customer));
 
-        Optional<Customer> customer1 = customerService.getCustomer(1L);
+        Customer customer1 = customerService.getCustomer(1L);
 
-        assertEquals(listSize, customer1.get().getPhoneNumbers().size());
+        assertEquals(listSize, customer1.getPhoneNumbers().size());
     }
 
     public List<PhoneNumber> getPhoneNumberList(int listSize) {

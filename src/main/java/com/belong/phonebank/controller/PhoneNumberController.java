@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/contact/phone-numbers")
+@RequestMapping("/phone-bank/phone-numbers")
 @Validated
 public class PhoneNumberController {
     @Autowired
@@ -35,9 +35,9 @@ public class PhoneNumberController {
     }
 
     // activate a phone number bu id
-    @PutMapping("/activate/{id}")
-    public PhoneNumber activateNumber(@PathVariable @Positive Long id) throws ResourceNotFoundException {
-        return service.updateActivation(id, true);
+    @PutMapping("/activate/{id}/{status}")
+    public PhoneNumber updateActivation(@PathVariable @Positive Long id, @PathVariable boolean status) throws ResourceNotFoundException {
+        return service.updateActivation(id, status);
     }
 
 

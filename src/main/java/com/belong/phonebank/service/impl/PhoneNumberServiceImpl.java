@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     private PhoneNumberRepository repository;
 
     @Override
+    @Transactional( readOnly = true)
     public PhoneNumberResponseDto getAllPhoneNumbers(int pageNo, int pageSize) {
         // Prepare page information
         Pageable paging = PageRequest.of(pageNo, pageSize);
@@ -41,6 +43,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     }
 
     @Override
+    @Transactional( readOnly = true)
     public PhoneNumber getPhoneNumberById(Long id) throws ResourceNotFoundException {
 
         Optional<PhoneNumber> phoneNumber = repository.findById(id);
@@ -51,6 +54,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     }
 
     @Override
+    @Transactional
     public PhoneNumber updateActivation(Long id, boolean active) throws ResourceNotFoundException {
 
         Optional<PhoneNumber> phoneNumber = repository.findById(id);
