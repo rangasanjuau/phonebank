@@ -31,13 +31,13 @@ public class PhoneNumberController {
 
     // Get a phone number by id
     @GetMapping("/{id}")
-    public PhoneNumber getPhoneNumberById(@PathVariable @Positive Long id) throws ResourceNotFoundException {
+    public PhoneNumber getPhoneNumberById(@PathVariable @Positive(message ="Invalid Phone Id") Long id) throws ResourceNotFoundException {
         return service.getPhoneNumberById(id);
     }
 
     // activate a phone number bu id
     @PutMapping("/activate/{id}/{status}")
-    public PhoneNumber updateActivation(@PathVariable @Positive Long id, @PathVariable boolean status) throws ResourceNotFoundException {
+    public PhoneNumber updateActivation(@PathVariable @Positive(message ="Invalid Phone Id") Long id, @PathVariable boolean status) throws ResourceNotFoundException {
         return service.updateActivation(id, status);
     }
 

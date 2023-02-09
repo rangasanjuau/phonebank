@@ -23,14 +23,14 @@ public class CustomerController {
 
     // Get Customer by id
     @GetMapping(value = "/{id}")
-    public CustomerResponseDto getCustomerById(@PathVariable @Positive Long id) throws ResourceNotFoundException {
+    public CustomerResponseDto getCustomerById(@PathVariable @Positive(message ="Invalid Customer Id") Long id) throws ResourceNotFoundException {
         return new CustomerResponseDto(new CustomerResponse(service.getCustomer(id)));
     }
 
 
     // Get Customer's all phone numbers by Customer id
     @GetMapping(value = "/phone-numbers/{id}")
-    public PhoneNumberResponse getCustomerPhoneNumbersById(@PathVariable @Positive Long id) throws ResourceNotFoundException {
+    public PhoneNumberResponse getCustomerPhoneNumbersById(@PathVariable @Positive(message ="Invalid Customer Id") Long id) throws ResourceNotFoundException {
         return service.getCustomerPhonNumbers(id);
     }
 }
