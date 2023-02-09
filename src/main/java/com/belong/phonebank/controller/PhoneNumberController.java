@@ -21,7 +21,13 @@ public class PhoneNumberController {
     public PhoneNumberService service;
 
 
-    // Get all phone numbers
+    /************************************************************************************************
+     * http://localhost:8080/phone-bank/phone-numbers
+     *
+     * @param
+     * @return PhoneNumberResponseDto
+     * @throws
+     */
     @GetMapping()
     public PhoneNumberResponseDto getPhoneNumbers(@RequestParam(defaultValue = "0") @Min(value = 0, message = "Page number must be greater than or equal to 0") Integer pageNo,
                                                   @RequestParam(defaultValue = "10") @Min(value = 1, message = "Page size must be greater than or equal to 1")
@@ -29,13 +35,29 @@ public class PhoneNumberController {
         return service.getAllPhoneNumbers(pageNo, pageSize);
     }
 
-    // Get a phone number by id
+
+    /************************************************************************************************
+     * http://localhost:8080/phone-bank/phone-numbers/{id}
+     *
+     * @param
+     * @return PhoneNumber
+     * @throws ResourceNotFoundException
+     */
     @GetMapping("/{id}")
     public PhoneNumber getPhoneNumberById(@PathVariable @Positive(message ="Invalid Phone Id") Long id) throws ResourceNotFoundException {
         return service.getPhoneNumberById(id);
     }
 
-    // activate a phone number bu id
+
+    /************************************************************************************************
+     * http://localhost:8080/phone-bank/phone-numbers/activate/{id}/{status}
+     *
+     * @param
+     * @return PhoneNumber
+     * @throws ResourceNotFoundException
+     */
+
+    
     @PutMapping("/activate/{id}/{status}")
     public PhoneNumber updateActivation(@PathVariable @Positive(message ="Invalid Phone Id") Long id, @PathVariable boolean status) throws ResourceNotFoundException {
         return service.updateActivation(id, status);

@@ -43,7 +43,7 @@ public class PhoneNumberServiceTest {
 
 
     @Test
-    public void getAllPhoneNumbers_ShouldReturnPhoneNumber() {
+    public void getAllPhoneNumbers_ShouldReturnPhoneNumbers() {
         int pageNo = 0;
         int pageSize = 5;
         Page<PhoneNumber> pageResult = getPhoneNumberDto(listSize);
@@ -63,18 +63,34 @@ public class PhoneNumberServiceTest {
     }
 
     @Test
+    public void getPhoneNumberById_ShouldReturnPhoneNumber() throws ResourceNotFoundException {
+        long id = 1L;
+        boolean active = false;
+        PhoneNumber phoneNumber = new PhoneNumber();
+        phoneNumber.setId(id);
+        phoneNumber.setActive(active);
+        when(repository.findById(id)).thenReturn(Optional.of(phoneNumber));
+
+        PhoneNumber response = phoneNumberService.getPhoneNumberById(id);
+
+        assertEquals(id, response.getId());
+        assertEquals(active, response.isActive());
+    }
+
+
+    @Test
     public void updateActivation_ShouldUpdatePhoneNumberAndReturnIt() throws ResourceNotFoundException {
         long id = 1L;
         boolean active = false;
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.setPhoneNumberId(id);
+        phoneNumber.setId(id);
         phoneNumber.setActive(!active);
         when(repository.findById(id)).thenReturn(Optional.of(phoneNumber));
         when(repository.save(any(PhoneNumber.class))).thenReturn(phoneNumber);
 
         PhoneNumber updatedPhoneNumber = phoneNumberService.updateActivation(id, active);
 
-        assertEquals(id, updatedPhoneNumber.getPhoneNumberId());
+        assertEquals(id, updatedPhoneNumber.getId());
         assertEquals(active, updatedPhoneNumber.isActive());
     }
 
@@ -83,7 +99,7 @@ public class PhoneNumberServiceTest {
         List<PhoneNumber> phoneNumbers = new ArrayList<>();
         for (int i = 0; i < listSize; i++) {
             PhoneNumber phoneNumber = new PhoneNumber();
-            phoneNumber.setPhoneNumberId(i);
+            phoneNumber.setId(i);
             phoneNumber.setActive(false);
             phoneNumbers.add(phoneNumber);
         }

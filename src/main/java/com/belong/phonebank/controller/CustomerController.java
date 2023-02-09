@@ -20,15 +20,27 @@ public class CustomerController {
     @Autowired
     public CustomerService service;
 
+    /************************************************************************************************
+     * http://localhost:8080/phone-bank/customer/{id}
+     *
+     * @param id
+     * @return CustomerResponseDto
+     * @throws ResourceNotFoundException
+     */
 
-    // Get Customer by id
     @GetMapping(value = "/{id}")
     public CustomerResponseDto getCustomerById(@PathVariable @Positive(message ="Invalid Customer Id") Long id) throws ResourceNotFoundException {
         return new CustomerResponseDto(new CustomerResponse(service.getCustomer(id)));
     }
 
 
-    // Get Customer's all phone numbers by Customer id
+    /************************************************************************************************
+     * http://localhost:8080/phone-bank/customer/phone-numbers/{id}
+     *
+     * @param id
+     * @return PhoneNumberResponse
+     * @throws ResourceNotFoundException
+     */
     @GetMapping(value = "/phone-numbers/{id}")
     public PhoneNumberResponse getCustomerPhoneNumbersById(@PathVariable @Positive(message ="Invalid Customer Id") Long id) throws ResourceNotFoundException {
         return service.getCustomerPhonNumbers(id);

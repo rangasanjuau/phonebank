@@ -1,5 +1,6 @@
 package com.belong.phonebank.service.impl;
 
+import com.belong.phonebank.dto.PhoneNumberResponse;
 import com.belong.phonebank.exception.ResourceNotFoundException;
 import com.belong.phonebank.model.Customer;
 import com.belong.phonebank.model.PhoneNumber;
@@ -38,7 +39,7 @@ public class CustomerServiceTest {
     public void getCustomer_ShouldReturnCustomer() throws ResourceNotFoundException {
 
         Customer customer = new Customer();
-        customer.setCustomerId(1L);
+        customer.setId(1L);
         customer.setPhoneNumbers(getPhoneNumberList(listSize));
 
 
@@ -49,11 +50,29 @@ public class CustomerServiceTest {
         assertEquals(listSize, customer1.getPhoneNumbers().size());
     }
 
+
+    @Test
+    public void getCustomerPhonNumbers_ShouldReturnPhoneNumberResponse() throws ResourceNotFoundException {
+
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setPhoneNumbers(getPhoneNumberList(listSize));
+
+
+        when(repository.findById(any())).thenReturn(Optional.of(customer));
+
+        PhoneNumberResponse phoneNumberResponse = customerService.getCustomerPhonNumbers(1L);
+
+        assertEquals(listSize, phoneNumberResponse.getPhoneNumbers().size());
+    }
+
+
+
     public List<PhoneNumber> getPhoneNumberList(int listSize) {
         List<PhoneNumber> list = new ArrayList<>();
         for (int i = 0; i < listSize; i++) {
             PhoneNumber phoneNumber = new PhoneNumber();
-            phoneNumber.setPhoneNumberId(i);
+            phoneNumber.setId(i);
             phoneNumber.setActive(false);
             list.add(phoneNumber);
         }
