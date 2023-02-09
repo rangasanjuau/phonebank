@@ -43,3 +43,19 @@ The solution will be evaluated based on the following criteria:
 - Maintainability
 - Test coverage
 - Performance
+
+
+
+
+
+# Delivered
+
+
+1.		Open API specification using swagger
+2.		REST Api Implementation of the written specification
+3.		GitHub link to the project 
+4.		Postman Collection
+5.		Testing Details and Screenshots PDF file
+6.		3 Videos demonstrating the working Swagger Specification with the solution
+
+
