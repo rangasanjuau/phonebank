@@ -1,10 +1,9 @@
 package com.belong.phonebank.service.impl;
 
-import com.belong.phonebank.Exception.ResourceNotFoundException;
+import com.belong.phonebank.exception.ResourceNotFoundException;
 import com.belong.phonebank.model.Customer;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.repository.CustomerRepository;
-import com.belong.phonebank.repository.PhoneNumberRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;

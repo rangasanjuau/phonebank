@@ -1,6 +1,6 @@
 package com.belong.phonebank.service.impl;
 
-import com.belong.phonebank.Exception.ResourceNotFoundException;
+import com.belong.phonebank.exception.ResourceNotFoundException;
 import com.belong.phonebank.dto.Meta;
 import com.belong.phonebank.dto.PhoneNumberResponse;
 import com.belong.phonebank.dto.PhoneNumberResponseDto;
@@ -34,7 +34,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
                     new Meta(pagedResult.getTotalElements(), pagedResult.getTotalPages()));
         } else {
             // else return empty reponse
-            return new PhoneNumberResponseDto(new PhoneNumberResponse(new ArrayList<PhoneNumber>()),
+            return new PhoneNumberResponseDto(new PhoneNumberResponse(new ArrayList<>()),
                     new Meta());
         }
 

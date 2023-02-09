@@ -1,8 +1,7 @@
 package com.belong.phonebank.controller;
 
 
-import com.belong.phonebank.Exception.ResourceNotFoundException;
-import com.belong.phonebank.dto.PhoneNumberResponse;
+import com.belong.phonebank.exception.ResourceNotFoundException;
 import com.belong.phonebank.dto.PhoneNumberResponseDto;
 import com.belong.phonebank.model.PhoneNumber;
 import com.belong.phonebank.service.PhoneNumberService;

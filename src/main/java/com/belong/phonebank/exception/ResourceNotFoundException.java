@@ -1,4 +1,4 @@
-package com.belong.phonebank.Exception;
+package com.belong.phonebank.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

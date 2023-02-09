@@ -1,4 +1,4 @@
-package com.belong.phonebank.Exception;
+package com.belong.phonebank.exception;
 
 public class ErrorDetails {
 
