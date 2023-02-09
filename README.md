@@ -1,6 +1,6 @@
 <h1 align="center">PhoneBank</h1>
 
-# Project Description 
+# Project Description
 
 Coding assignment for Belong
 
@@ -11,10 +11,14 @@ Coding assignment for Belong
 We are a Telecom operator. In our database, we are starting to store phone numbers
 associated to customers (1 customer: N phone numbers) and we will provide
 interfaces to manage them.
+
+
 We need to provide the below capabilities:
 - get all phone numbers
 - get all phone numbers of a single customer
 - activate a phone number
+
+
 
 <h3 align="left">Challenge</h3>
 Provide API specifications for the above functions/capabilities.
@@ -29,10 +33,12 @@ Java
 Deliverables
 Interface specifications, the source files and any test code – preferably in a github /
 bitbucket public repo.
+
+
 The solution will be evaluated based on the following criteria:
 - Correctness
 - Code structure
--Data structures
+- Data structures
 - Extensibility
 - Maintainability
 - Test coverage
